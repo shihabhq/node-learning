@@ -9,13 +9,16 @@ const server1 = http.createServer((req, res) => {
 let port = process.env.PORT;
 
 const server2 = http.createServer((req, res) => {
-  res.writeHead(200, { "Content-Type": "application/json" }); //writehead(statuscode, header object)
-  console.log(req);
-
-  res.write(
-    JSON.stringify({ message: "nothing to worry about", sender: "017445" })
-  );
-  res.end();
+  if (req.url === "/") {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    res.end("<h1>hwllo this is homepage</h1>");
+  } else if (req.url === "/about") {
+    res.writeHead(200, { "Content-Type": "text/html" });
+    res.end("<h1>hwllo this is about page</h1>");
+  } else {
+    res.writeHead(404, { "Content-Type": "text/html" });
+    res.end(`<h1>We did not find the ${req.url.replace("/", "")} page</h1>`);
+  }
 });
 
 server2.listen(port, () => {
