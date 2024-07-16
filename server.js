@@ -26,6 +26,8 @@ const server2 = http.createServer(async (req, res) => {
         filePath = path.join(__dirname, "public", "index.html");
       } else if (req.url === "/about") {
         filePath = path.join(__dirname, "public", "about.html");
+      } else if (req.url === "/contact") {
+        filePath = path.join(__dirname, "public", "contact.html");
       } else {
         res.statusCode = 404;
         filePath = path.join(__dirname, "public", "notfound.html");
