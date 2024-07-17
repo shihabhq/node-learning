@@ -8,7 +8,13 @@ const users = [
   { id: 3, name: "rakib" },
 ];
 
-const server = createServer((req, res) => {
+//Logger middleware
+const logger = (req, res, next) => {
+  console.log(`${req.url} and ${req.method}`);
+  next();
+};
+
+const gettingUser = (req, res) => {
   if (req.url === "/api/users" && req.method === "GET") {
     res.setHeader("Content-Type", "application/json");
     res.write(JSON.stringify(users));
@@ -30,6 +36,12 @@ const server = createServer((req, res) => {
     res.write(JSON.stringify({ message: "something went wrong" }));
     res.end();
   }
+};
+
+const server = createServer((req, res) => {
+  logger(req, res, ()=>{
+    gettingUser(req,res)
+  });
 });
 
 server.listen(port, () => {
