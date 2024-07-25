@@ -14,7 +14,7 @@ const data1 = fs1.readFileSync("./text.txt", "utf8");
 
 //readfile() - promise version .then
 fs.readFile("./text.txt", "utf8")
-  //.then((data) => console.log(data + " promise .then"))
+  .then((data) => console.log(data + " promise .then"))
   .catch((err) => console.log(err));
 
 //readfile() - promise version async await
