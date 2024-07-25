@@ -1,23 +1,21 @@
-import url from "url";
-import path from "path";
+import url from 'url';
+import path, { basename } from 'path';
 
-const filePath = "./dir1/dir2/text.txt";
+const __filename = url.fileURLToPath(import.meta.url)
 
-//basename or the last file in the path
-console.log(path.basename(filePath));
-//dirname - directory of the current file
-console.log(path.dirname(filePath));
-//extension name
-console.log(path.extname(filePath));
-//the path full object
-console.log(path.parse(filePath));
+//basename
+const baseName = path.basename(__filename)
+//current directory
+const dirname = path.dirname(__filename)
+//extention name
+const ext = path.extname(__filename)
+//full path object
+const pathObj = path.parse(__filename)
 
-const __filename = url.fileURLToPath(import.meta.url);
+//joining files
+const currentPath = path.join(dirname,'dir1','dir2','file.txt')
 
-const __dirname = path.dirname(__filename);
+//object to string
+const formattedPath = path.format({root:'/home',dir:'/iphone/sdcard',base:'path.css',ext:'.css'}) //iphone/sdcard/path.css
+const normalizedPath = path.normalize('./path//http//extension/simp.js') //path/http/extension/simp.js
 
-const onlyFileName = __filename.replace(__dirname, "");
-
-const filePath2 = path.resolve(__dirname, "dir1", "dir2", "file.txt");
-console.log(filePath2);
-//NOTE: resolve and join does the same thing
